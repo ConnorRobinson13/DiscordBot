@@ -41,21 +41,10 @@ async def is_allowed(ctx):
 @client.event
 async def on_ready():
     await client.change_presence(status=discord.Status.idle, activity=discord.Game("Flirting with MEG PIT"))
-    print("bot has connected to Discord")
+    print("TheBoysBot has connected to Discord, waiting for commands")
     client.load_extension('cogs.music')
 
 
-@client.event
-async def on_member_join(member):
-    id = client.get_guild(327481954427731969)
-
-    print(f"""{member} has joined server""")
-
-
-
-@client.event
-async def on_member_remove(member):
-    print(f"""{member} has left the server""")
 
 
 @client.command()
@@ -72,19 +61,24 @@ async def Help(ctx):
                     value="Clears one message by default, but takes parameter to delete up to 125 messages",
                     inline=False)
 
+    # k/d
+    embed.add_field(name="FindKD (kd)",
+                    value="type in .kd followed by \"xbox\" or \"playstation\" and a gamer tag to find somones kd",
+                    inline=False)
+
     # join
     embed.add_field(name="join (j)",
                     value="Forces bot to join your voice channel",
                     inline=False)
 
     # leave
-    embed.add_field(name="leave (l)",
+    embed.add_field(name="disconnect (dc)",
                     value="Forces bot to leave your voice channel",
                     inline=False)
 
     # play
     embed.add_field(name="play (p)",
-                    value="Use this command with a youtube URL to play any audio from youtube",
+                    value="Use this command to play any audio from youtube",
                     inline=False)
 
     # MLG
@@ -95,6 +89,11 @@ async def Help(ctx):
     # GSO
     embed.add_field(name="Nolans_Message (gso)",
                     value="Plays Nolan's special message",
+                    inline=False)
+
+    # ITSLIT
+    embed.add_field(name="ITS_LIt (il)",
+                    value="plays its lit from Travis Scott",
                     inline=False)
 
     await ctx.channel.send(embed=embed)
