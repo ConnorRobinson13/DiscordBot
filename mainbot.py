@@ -14,6 +14,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import subprocess
 
 
+os.system('start cmd /c "java -jar Lavalink.jar"')
 
 # serverid = 327481954427731969
 
@@ -121,7 +122,7 @@ async def insult(ctx, *, name):
 
 
 def randInsult():
-    s = open("txt\Insults.txt", "r")
+    s = open("txt/Insults.txt", "r")
     m = s.readlines()
     l = []
     for i in range(0, len(m) - 1):
@@ -223,7 +224,7 @@ async def MLG_AIRHORN(ctx):
     await joinc(ctx)
     time.sleep(1)
     voic = get(client.voice_clients, guild=ctx.guild)
-    voic.play(discord.FFmpegPCMAudio("audio\MLG Horns.mp3"))
+    voic.play(discord.FFmpegPCMAudio("audio/MLG Horns.mp3"))
     voic.source = discord.PCMVolumeTransformer(voic.source)
     voic.source.volume = 0.3
     time.sleep(4)
@@ -235,7 +236,7 @@ async def Nolans_message(ctx):
     await joinc(ctx)
     time.sleep(1)
     voic = get(client.voice_clients, guild=ctx.guild)
-    voic.play(discord.FFmpegPCMAudio("audio\Nolans Message.mp3"))
+    voic.play(discord.FFmpegPCMAudio("audio/Nolans Message.mp3"))
     voic.source = discord.PCMVolumeTransformer(voic.source)
     voic.source.volume = 0.3
     time.sleep(4)
@@ -247,7 +248,7 @@ async def ITSLIT(ctx):
     await joinc(ctx)
     time.sleep(1)
     voic = get(client.voice_clients, guild=ctx.guild)
-    voic.play(discord.FFmpegPCMAudio("audio\ITSLIT.mp3"))
+    voic.play(discord.FFmpegPCMAudio("audio/ITSLIT.mp3"))
     voic.source = discord.PCMVolumeTransformer(voic.source)
     voic.source.volume = 0.3
     time.sleep(4)
