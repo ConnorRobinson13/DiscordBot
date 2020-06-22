@@ -11,14 +11,14 @@ from selenium.webdriver.common.keys import Keys
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-
+import subprocess
 
 
 
 # serverid = 327481954427731969
 
 def read_token():
-    with open('Token.txt', "r") as file:
+    with open('txt\Token.txt', "r") as file:
         lines = file.readlines()
         return lines[0].strip()
 
@@ -121,7 +121,7 @@ async def insult(ctx, *, name):
 
 
 def randInsult():
-    s = open("Insults.txt", "r")
+    s = open("txt\Insults.txt", "r")
     m = s.readlines()
     l = []
     for i in range(0, len(m) - 1):
@@ -150,6 +150,18 @@ async def clear(ctx, amount=2):
 async def kick(ctx, memeber: discord.Member, *, reason=None):
     await memeber.kick(reason=reason)
     print(f"""Member {memeber} was kicked for {reason}""")
+
+
+@client.command(aliases=["ccn"])
+@commands.check(is_allowed)
+async def editChannelName(ctx, channel: discord.VoiceChannel, *, new_name):
+    await channel.edit(name=new_name)
+
+@client.command(aliases=["cn"])
+@commands.check(is_allowed)
+async def editUserName(ctx, member: discord.Member, *, new_name):
+    await member.edit(nick=new_name)
+
 
 @client.command(aliases=["kd"])
 async def findKD(ctx, console, gamertag):
@@ -194,12 +206,24 @@ async def findKD(ctx, console, gamertag):
 
 # VOICE COMMANDS
 
+@client.command()
+async def joinc(ctx):
+    channel = ctx.author.voice.channel
+    await channel.connect()
+
+@client.command()
+async def leave(ctx):
+    server = ctx.message.guild.voice_client
+    await server.disconnect()
+
+
+
 @client.command(aliases=["mlg"])
 async def MLG_AIRHORN(ctx):
     await joinc(ctx)
     time.sleep(1)
     voic = get(client.voice_clients, guild=ctx.guild)
-    voic.play(discord.FFmpegPCMAudio("MLG Horns.mp3"))
+    voic.play(discord.FFmpegPCMAudio("audio\MLG Horns.mp3"))
     voic.source = discord.PCMVolumeTransformer(voic.source)
     voic.source.volume = 0.3
     time.sleep(4)
@@ -211,7 +235,7 @@ async def Nolans_message(ctx):
     await joinc(ctx)
     time.sleep(1)
     voic = get(client.voice_clients, guild=ctx.guild)
-    voic.play(discord.FFmpegPCMAudio("Nolans Message.mp3"))
+    voic.play(discord.FFmpegPCMAudio("audio\Nolans Message.mp3"))
     voic.source = discord.PCMVolumeTransformer(voic.source)
     voic.source.volume = 0.3
     time.sleep(4)
@@ -223,22 +247,11 @@ async def ITSLIT(ctx):
     await joinc(ctx)
     time.sleep(1)
     voic = get(client.voice_clients, guild=ctx.guild)
-    voic.play(discord.FFmpegPCMAudio("ITSLIT.mp3"))
+    voic.play(discord.FFmpegPCMAudio("audio\ITSLIT.mp3"))
     voic.source = discord.PCMVolumeTransformer(voic.source)
     voic.source.volume = 0.3
     time.sleep(4)
     await leave(ctx)
-
-@client.command(aliases=["ccn"])
-@commands.check(is_allowed)
-async def editChannelName(ctx, channel: discord.VoiceChannel, *, new_name):
-    await channel.edit(name=new_name)
-
-@client.command(aliases=["cn"])
-@commands.check(is_allowed)
-async def editUserName(ctx, member: discord.Member, *, new_name):
-    await member.edit(nick=new_name)
-
 
 
 client.run(token)
