@@ -253,5 +253,16 @@ async def ITSLIT(ctx):
     time.sleep(4)
     await leave(ctx)
 
+@client.command(aliases=["WOO"])
+async def WOOBACKWEDNESDAY(ctx):
+    await joinc(ctx)
+    time.sleep(1)
+    voic = get(client.voice_clients, guild=ctx.guild)
+    voic.play(discord.FFmpegPCMAudio("audio/WOOBACKWEDNESDAY.mp3"))
+    voic.source = discord.PCMVolumeTransformer(voic.source)
+    voic.source.volume = 0.3
+    time.sleep(30)
+    await leave(ctx)
+
 
 client.run(token)
