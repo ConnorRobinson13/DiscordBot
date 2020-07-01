@@ -31,9 +31,9 @@ client = commands.Bot(command_prefix=".")
 
 async def is_allowed(ctx):
     allowed = False
-    if ctx.author.id == 426103778026979328:
+    if ctx.author.id == #enter id here :
         allowed = True
-    if ctx.author.id == 308430209705836556:
+    if ctx.author.id == #enter id here:
         allowed = True
     return allowed
 
